@@ -1,0 +1,71 @@
+﻿@model WebApplication.Models.ReadingVM
+
+@{
+    ViewBag.Heading = "Kvittering";
+    Layout = "~/Views/Home/_layoutLoggedIn.cshtml";
+}
+
+<div>
+    <div>
+        <label class="form-control-static">Sidste års forbrug (@ViewBag.lastYear):</label>
+    </div>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-1">@ViewBag.lastKilo</label>
+            <div class="col-md-1">
+                <p class="form-control-static">kWh</p>
+            </div>
+        </div>
+    </form>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-1">@ViewBag.lastCubic</label>
+            <div class="col-md-1">
+                <p class="form-control-static">m<sup>3</sup></p>
+            </div>
+        </div>
+    </form>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-1">@ViewBag.lastHour</label>
+            <div class="col-md-1">
+                <p class="form-control-static">timer</p>
+            </div>
+        </div>
+    </form>
+    <div>
+        <label class="form-control-static">Dette års forbrug (@ViewBag.year):</label>
+    </div>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-1">@ViewBag.kilo</label>
+            <div class="col-md-1">
+                <p class="form-control-static">kWh</p>
+            </div>
+        </div>
+    </form>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-1">@ViewBag.cubic</label>
+            <div class="col-md-1">
+                <p class="form-control-static">m<sup>3</sup></p>
+            </div>
+        </div>
+    </form>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-1">@ViewBag.hour</label>
+            <div class="col-md-1">
+                <p class="form-control-static">timer</p>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <p class="alert">@ViewBag.CoolingAlert</p>
+    </div>
+    <div class="row">
+        <input type="button" value="Ret aflæsning" onclick="history.go(-1);" class="btn" />
+
+        <input type="button" value="Bekræft" class="btn" onclick="location.href='@Url.Action("Confirm", "Home")'" />
+    </div>
+</div>

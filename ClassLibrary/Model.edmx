@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DistrictHeatingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ActiveYear">
+          <Key>
+            <PropertyRef Name="Year" />
+          </Key>
+          <Property Name="Year" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Consumer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="25" />
+          <Property Name="Address" Type="varchar" MaxLength="25" />
+          <Property Name="ZipCode" Type="char" MaxLength="4" />
+          <Property Name="City" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Gauge">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Password" Type="char" MaxLength="4" />
+          <Property Name="Description" Type="varchar" MaxLength="25" />
+          <Property Name="ConsumerID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reading">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KilowattHours" Type="int" Nullable="false" />
+          <Property Name="CubicMeters" Type="int" Nullable="false" />
+          <Property Name="Hours" Type="int" Nullable="false" />
+          <Property Name="Year" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="GaugeID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Gauge__ConsumerI__4A8310C6">
+          <End Role="Consumer" Type="Self.Consumer" Multiplicity="1" />
+          <End Role="Gauge" Type="Self.Gauge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Consumer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Gauge">
+              <PropertyRef Name="ConsumerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reading__GaugeID__4E53A1AA">
+          <End Role="Gauge" Type="Self.Gauge" Multiplicity="1" />
+          <End Role="Reading" Type="Self.Reading" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gauge">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Reading">
+              <PropertyRef Name="GaugeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DistrictHeatingModelStoreContainer">
+          <EntitySet Name="ActiveYear" EntityType="Self.ActiveYear" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Consumer" EntityType="Self.Consumer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gauge" EntityType="Self.Gauge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reading" EntityType="Self.Reading" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Gauge__ConsumerI__4A8310C6" Association="Self.FK__Gauge__ConsumerI__4A8310C6">
+            <End Role="Consumer" EntitySet="Consumer" />
+            <End Role="Gauge" EntitySet="Gauge" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reading__GaugeID__4E53A1AA" Association="Self.FK__Reading__GaugeID__4E53A1AA">
+            <End Role="Gauge" EntitySet="Gauge" />
+            <End Role="Reading" EntitySet="Reading" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DistrictHeatingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DistrictHeatingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Consumers" EntityType="DistrictHeatingModel.Consumer" />
+          <EntitySet Name="Gauges" EntityType="DistrictHeatingModel.Gauge" />
+          <EntitySet Name="Readings" EntityType="DistrictHeatingModel.Reading" />
+          <AssociationSet Name="FK__Gauge__ConsumerI__4CA06362" Association="DistrictHeatingModel.FK__Gauge__ConsumerI__4CA06362">
+            <End Role="Consumer" EntitySet="Consumers" />
+            <End Role="Gauge" EntitySet="Gauges" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reading__GaugeID__4F7CD00D" Association="DistrictHeatingModel.FK__Reading__GaugeID__4F7CD00D">
+            <End Role="Gauge" EntitySet="Gauges" />
+            <End Role="Reading" EntitySet="Readings" />
+          </AssociationSet>
+          <EntitySet Name="ActiveYears" EntityType="DistrictHeatingModel.ActiveYear" />
+        </EntityContainer>
+        <EntityType Name="Consumer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Gauges" Relationship="DistrictHeatingModel.FK__Gauge__ConsumerI__4CA06362" FromRole="Consumer" ToRole="Gauge" />
+        </EntityType>
+        <EntityType Name="Gauge">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Password" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="ConsumerID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Consumer" Relationship="DistrictHeatingModel.FK__Gauge__ConsumerI__4CA06362" FromRole="Gauge" ToRole="Consumer" />
+          <NavigationProperty Name="Readings" Relationship="DistrictHeatingModel.FK__Reading__GaugeID__4F7CD00D" FromRole="Gauge" ToRole="Reading" />
+        </EntityType>
+        <EntityType Name="Reading">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KilowattHours" Type="Int32" Nullable="false" />
+          <Property Name="CubicMeters" Type="Int32" Nullable="false" />
+          <Property Name="Hours" Type="Int32" Nullable="false" />
+          <Property Name="Year" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="GaugeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Gauge" Relationship="DistrictHeatingModel.FK__Reading__GaugeID__4F7CD00D" FromRole="Reading" ToRole="Gauge" />
+        </EntityType>
+        <Association Name="FK__Gauge__ConsumerI__4CA06362">
+          <End Type="DistrictHeatingModel.Consumer" Role="Consumer" Multiplicity="1" />
+          <End Type="DistrictHeatingModel.Gauge" Role="Gauge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Consumer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Gauge">
+              <PropertyRef Name="ConsumerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reading__GaugeID__4F7CD00D">
+          <End Type="DistrictHeatingModel.Gauge" Role="Gauge" Multiplicity="1" />
+          <End Type="DistrictHeatingModel.Reading" Role="Reading" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gauge">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Reading">
+              <PropertyRef Name="GaugeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ActiveYear">
+          <Key>
+            <PropertyRef Name="Year" />
+          </Key>
+          <Property Name="Year" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DistrictHeatingModelStoreContainer" CdmEntityContainer="DistrictHeatingEntities">
+          <EntitySetMapping Name="Consumers">
+            <EntityTypeMapping TypeName="DistrictHeatingModel.Consumer">
+              <MappingFragment StoreEntitySet="Consumer">
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gauges">
+            <EntityTypeMapping TypeName="DistrictHeatingModel.Gauge">
+              <MappingFragment StoreEntitySet="Gauge">
+                <ScalarProperty Name="ConsumerID" ColumnName="ConsumerID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Readings">
+            <EntityTypeMapping TypeName="DistrictHeatingModel.Reading">
+              <MappingFragment StoreEntitySet="Reading">
+                <ScalarProperty Name="GaugeID" ColumnName="GaugeID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+                <ScalarProperty Name="CubicMeters" ColumnName="CubicMeters" />
+                <ScalarProperty Name="KilowattHours" ColumnName="KilowattHours" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActiveYears">
+            <EntityTypeMapping TypeName="DistrictHeatingModel.ActiveYear">
+              <MappingFragment StoreEntitySet="ActiveYear">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

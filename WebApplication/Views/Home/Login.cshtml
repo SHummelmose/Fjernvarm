@@ -1,0 +1,32 @@
+﻿@model WebApplication.Models.LoginVM
+
+@{
+    ViewBag.Heading = "Velkommen til fjernvarmeaflæsning";
+    Layout = "~/Views/Home/_layout.cshtml";
+}
+
+<div>
+    @using (@Html.BeginForm())
+    {
+        
+            <h3>Aflæsning år @ViewBag.Year</h3>
+            <p class="alert">@ViewBag.LoginError</p>
+        
+        
+        <p>
+            Måler ID *<br />
+            @Html.TextBoxFor(x => x.GaugeID, new { type = "number" })
+            <span class="alert">@Html.ValidationMessageFor(x => x.GaugeID)</span>
+        </p>
+
+        <p>
+            Password *<br />
+            @Html.TextBoxFor(x => x.Password)
+            <span class="alert">@Html.ValidationMessageFor(x => x.Password)</span>
+        </p>
+        <br />
+
+        <input type="submit" value="Log ind" class="btn" />
+    }
+</div>
+

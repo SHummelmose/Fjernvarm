@@ -1,0 +1,19 @@
+﻿<Window x:Class="WpfApplication.CreateGaugeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApplication"
+        mc:Ignorable="d"
+        Title="Opret måler" Height="200" Width="300"
+        ResizeMode="NoResize">
+    <Grid>
+        <Label Content="Forbruger:" HorizontalAlignment="Left" Margin="15,12,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="Beskrivelse:" HorizontalAlignment="Left" Margin="15,43,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="tBoxName" HorizontalAlignment="Left" Height="23" Margin="95,15,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+        <TextBox x:Name="tBoxDescription" HorizontalAlignment="Left" Height="23" Margin="95,46,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+
+        <Button x:Name="btnCancel" Content="Annullér" HorizontalAlignment="Left" Margin="25,116,0,0" Width="100" Click="btnCancel_Click" Height="25" VerticalAlignment="Top"/>
+        <Button x:Name="btnCreate" Content="Opret" Margin="167,116,25,0" VerticalAlignment="Top" Height="25" Click="btnCreate_Click"/>
+    </Grid>
+</Window>

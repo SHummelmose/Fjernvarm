@@ -1,0 +1,34 @@
+﻿@model WebApplication.Models.ReadingVM
+
+@{
+    ViewBag.Heading = "Dine aflæste data";
+    Layout = "~/Views/Home/_layoutLoggedIn.cshtml";
+}
+
+<div>
+    @using (@Html.BeginForm())
+    {
+        <h3>Aflæsning år @ViewBag.Year</h3>
+        <p class="alert">@ViewBag.ReadingError</p>
+        <p>
+            Kilowatt-timer (kWh)*<br />
+            @Html.TextBoxFor(x => x.kWh, new { type = "number" })
+            <span class="alert">@Html.ValidationMessageFor(x => x.kWh)</span>
+        </p>
+
+        <p>
+            Kubikmeter (m<sup>3</sup>)*<br />
+            @Html.TextBoxFor(x => x.CubicMeters, new { type = "number" })
+            <span class="alert">@Html.ValidationMessageFor(x => x.CubicMeters)</span>
+        </p>
+
+        <p>
+            Timer *<br />
+            @Html.TextBoxFor(x => x.Hours, new { type = "number" })
+            <span class="alert">@Html.ValidationMessageFor(x => x.Hours)</span>
+        </p>
+        <br />
+
+        <input type="submit" value="Næste" class="btn" />
+    }
+</div>
